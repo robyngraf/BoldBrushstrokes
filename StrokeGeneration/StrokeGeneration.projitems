@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>a893517a-b635-4b43-b8c1-cea3c7c4fe51</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>StrokeGeneration</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ArrayExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Artist.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ColourExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)D2DExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FastMaths.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MinMaxRange.cs" />
+    <Compile Include="..\StrokeGeneration\Deterministic.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Stroke.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)VectorExtensions.cs" />
+  </ItemGroup>
+</Project>

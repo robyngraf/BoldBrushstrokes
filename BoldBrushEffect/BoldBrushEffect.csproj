@@ -1,0 +1,139 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0-windows10.0.17763.0</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RootNamespace>BoldBrushEffect</RootNamespace>
+    <AssemblyName>BoldBrush</AssemblyName>
+    <Deterministic>False</Deterministic>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <SignAssembly>False</SignAssembly>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="BoldBrush_old.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="BoldBrush.png" />
+    <None Remove="brushstroke_broken.svg" />
+    <None Remove="brushstroke_dappled_streaks.svg" />
+    <None Remove="brushstroke_novelty_heart.svg" />
+    <None Remove="brushstroke_novelty_skull.svg" />
+    <None Remove="brushstroke_rectangle.svg" />
+    <None Remove="brushstroke_rough.svg" />
+    <None Remove="brushstroke_smooth.svg" />
+    <None Remove="brushstroke_streaky.svg" />
+    <None Remove="brushstroke_trailing_off.svg" />
+    <None Remove="brushstroke_wibbly.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="BoldBrush.png" />
+    <EmbeddedResource Include="BoldBrush.sample.png" />
+    <EmbeddedResource Include="Strokes\broken.svg" />
+    <EmbeddedResource Include="Strokes\novelty_heart.svg" />
+    <EmbeddedResource Include="Strokes\novelty_skull.svg" />
+    <EmbeddedResource Include="Strokes\rectangle.svg" />
+    <EmbeddedResource Include="Strokes\rough.svg" />
+    <EmbeddedResource Include="Strokes\smooth.svg" />
+    <EmbeddedResource Include="Strokes\dappled_streaks.svg" />
+    <EmbeddedResource Include="Strokes\streaky.svg" />
+    <EmbeddedResource Include="Strokes\trailing_off.svg" />
+    <EmbeddedResource Include="Strokes\wibbly.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="BoldBrush_old.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ComputeSharp.D2D1" Version="2.0.3" IncludeAssets="All" />
+    <PackageReference Include="ILRepack" Version="2.0.18" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="PaintDotNet.ComponentModel">
+      <HintPath>C:\Program Files\paint.net\PaintDotNet.ComponentModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PaintDotNet.Core">
+      <HintPath>C:\Program Files\paint.net\PaintDotNet.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PaintDotNet.Effects.Core">
+      <HintPath>C:\Program Files\paint.net\PaintDotNet.Effects.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PaintDotNet.Framework">
+      <HintPath>C:\Program Files\paint.net\PaintDotNet.Framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PaintDotNet.Fundamentals">
+      <HintPath>C:\Program Files\paint.net\PaintDotNet.Fundamentals.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PaintDotNet.Primitives">
+      <HintPath>C:\Program Files\paint.net\PaintDotNet.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PaintDotNet.PropertySystem">
+      <HintPath>C:\Program Files\paint.net\PaintDotNet.PropertySystem.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PaintDotNet.Windows">
+      <HintPath>C:\Program Files\paint.net\PaintDotNet.Windows.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PaintDotNet.Windows.Core">
+      <HintPath>C:\Program Files\paint.net\PaintDotNet.Windows.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PaintDotNet.Windows.Framework">
+      <HintPath>C:\Program Files\paint.net\PaintDotNet.Windows.Framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ComputeSharp.Core.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="CustomLibs\Canary.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="CustomLibs\ComputeSharp.Core.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="CustomLibs\ComputeSharp.D2D1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
+  <PropertyGroup>
+    <!-- Set Path Variables -->
+    <PdnRoot>C:\Program Files\paint.net</PdnRoot>
+    <illink>C:\Program Files\dotnet\sdk\7.0.101\Sdks\Microsoft.NET.ILLink.Tasks\tools\net7.0\illink.dll</illink>
+  </PropertyGroup>
+  
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="&#xD;&#xA;if $(ConfigurationName)==Debug goto debug&#xD;&#xA;&#xD;&#xA;:release&#xD;&#xA;if not exist &quot;$(TargetDir)..\AllAssemblies\&quot; mkdir &quot;$(TargetDir)..\AllAssemblies\&quot;&#xD;&#xA;if not exist &quot;$(TargetDir)..\AllAssemblies\output\&quot; mkdir &quot;$(TargetDir)..\AllAssemblies\output&quot;&#xD;&#xA;if not exist &quot;$(TargetDir)..\AllAssemblies2\&quot; mkdir &quot;$(TargetDir)..\AllAssemblies2\&quot;&#xD;&#xA;if not exist &quot;$(TargetDir)..\AllAssemblies2\Merged\&quot; mkdir &quot;$(TargetDir)..\AllAssemblies2\Merged&quot;&#xD;&#xA;&#xD;&#xA;set latestDotNet=NotFound&#xD;&#xA;&#xD;&#xA;for /F %25%25d in ('dir /a:d /b /o:-d &quot;C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\7.0.*&quot;') do (&#xD;&#xA;  set latestDotNet=%25%25d&#xD;&#xA;  goto loopExit&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;:loopExit&#xD;&#xA;&#xD;&#xA;robocopy &quot;C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\%25latestDotNet%25\ref\net7.0&quot; &quot;$(TargetDir)..\AllAssemblies&quot;&#xD;&#xA;robocopy &quot;C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\%25latestDotNet%25\ref\net7.0&quot; &quot;$(TargetDir)..\AllAssemblies&quot;&#xD;&#xA;robocopy &quot;$(TargetDir)\&quot; &quot;$(TargetDir)..\AllAssemblies&quot;&#xD;&#xA;robocopy &quot;$(TargetDir)\CustomLibs&quot; &quot;$(TargetDir)..\AllAssemblies&quot;&#xD;&#xA;&#xD;&#xA;cd $(TargetDir)..\AllAssemblies&#xD;&#xA;&#xD;&#xA;dotnet exec &quot;$(illink)&quot; -a &quot;$(TargetPath)&quot; library -d &quot;.&quot; --trim-mode link --action copy --skip-unresolved --action link &quot;ComputeSharp.Core&quot; -out &quot;output&quot;&#xD;&#xA;&#xD;&#xA;copy &quot;D:\Nuget\ilrepack\2.0.18\tools\ILRepack.exe&quot; &quot;$(TargetDir)..\AllAssemblies2&quot;&#xD;&#xA;robocopy &quot;C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\%25latestDotNet%25\ref\net7.0&quot; &quot;$(TargetDir)..\AllAssemblies2&quot;&#xD;&#xA;robocopy &quot;C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\%25latestDotNet%25\ref\net7.0&quot; &quot;$(TargetDir)..\AllAssemblies2&quot;&#xD;&#xA;robocopy &quot;$(TargetDir)..\AllAssemblies\output&quot; &quot;$(TargetDir)..\AllAssemblies2&quot;&#xD;&#xA;&#xD;&#xA;cd $(TargetDir)..\AllAssemblies2&#xD;&#xA;ILRepack.exe /internalize /ndebug /union /out:Merged\$(TargetFileName) $(TargetFileName) ComputeSharp.D2D1.dll ComputeSharp.Core.dll&#xD;&#xA;    cmd /c explorer &quot;$(TargetDir)..\AllAssemblies2\Merged&quot;&#xD;&#xA;cd $(TargetDir)&#xD;&#xA;if not exist &quot;$(TargetDir)..\AllAssemblies2\Merged\$(TargetFileName)&quot; exit -1&#xD;&#xA;goto end&#xD;&#xA;&#xD;&#xA;:debug&#xD;&#xA;XCOPY &quot;$(TargetDir)BoldBrush.dll&quot; &quot;C:\Users\Lenovo S30\OneDrive\Documents\paint.net App Files\Effects&quot; /S /Y&#xD;&#xA;XCOPY &quot;$(TargetDir)BoldBrush.pdb&quot; &quot;C:\Users\Lenovo S30\OneDrive\Documents\paint.net App Files\Effects&quot; /S /Y&#xD;&#xA;XCOPY &quot;$(TargetDir)CustomLibs\ComputeSharp.Core.dll&quot; &quot;C:\Users\Lenovo S30\OneDrive\Documents\paint.net App Files\Effects&quot; /S /Y&#xD;&#xA;XCOPY &quot;$(TargetDir)CustomLibs\ComputeSharp.D2D1.dll&quot; &quot;C:\Users\Lenovo S30\OneDrive\Documents\paint.net App Files\Effects&quot; /S /Y&#xD;&#xA;&#xD;&#xA;:end&#xD;&#xA;exit 0" />
+  </Target>
+  
+  <Import Project="..\StrokeGeneration\StrokeGeneration.projitems" Label="Shared" />
+  
+  
+</Project>
